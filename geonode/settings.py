@@ -325,7 +325,12 @@ GEONODE_CONTRIB_APPS = (
 GEONODE_APPS = GEONODE_CORE_APPS + GEONODE_INTERNAL_APPS + GEONODE_CONTRIB_APPS
 
 INSTALLED_APPS = (
-
+    'admin_tools',
+    'djangobower',
+    'admin_tools.dashboard',
+    'admin_tools.menu',
+    'admin_tools.theming',
+    'django_nvd3',
     'modeltranslation',
 
     # Boostrap admin theme
@@ -513,6 +518,12 @@ TEMPLATES = [
         'DIRS': [os.path.join(PROJECT_ROOT, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
+             # Either remove APP_DIRS or remove the 'loaders' option.
+            'loaders': [
+                'admin_tools.template_loaders.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+             ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
